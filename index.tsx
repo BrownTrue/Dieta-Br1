@@ -95,13 +95,36 @@ const ICONS = {
     timing: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
     supplements: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>`,
     checkmark: `<svg class="h-5 w-5 text-teal-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>`,
+    scale: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 7.001L7 16l4 4 6.001-6.001a5.002 5.002 0 00-7.001-7.001zM11 7l-3 3m0 0l3 3m-3-3h12" /></svg>`,
 };
 
 // --- LOGICA DELL'APPLICAZIONE ---
 document.addEventListener('DOMContentLoaded', () => {
     const daySelector = document.getElementById('day-selector');
     const mainContent = document.getElementById('main-content');
-    let currentDayId = dietPlan.days[0].id;
+    let currentDayId;
+
+    // Funzione per determinare l'ID del giorno corrente
+    const getTodayId = () => {
+        const today = new Date().getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
+        switch (today) {
+            case 1: // Monday
+            case 4: // Thursday
+                return 'lun-gio';
+            case 2: // Tuesday
+            case 5: // Friday
+                return 'mar-ven';
+            case 3: // Wednesday
+            case 6: // Saturday
+                return 'mer-sab';
+            case 0: // Sunday
+                return 'dom';
+            default:
+                return dietPlan.days[0].id; // Fallback
+        }
+    };
+
+    currentDayId = getTodayId(); // Imposta il giorno iniziale
 
     const getMealIcon = (mealName) => {
         const lowerName = mealName.toLowerCase();
@@ -268,9 +291,83 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     };
 
+    // --- LOGICA TRACCIAMENTO PESO ---
+    const renderWeightTracker = () => {
+        const container = document.getElementById('weight-tracker-section');
+        if (!container) return;
+
+        const weights = JSON.parse(localStorage.getItem('userWeights') || '[]')
+            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+        const historyHtml = weights.length > 0
+            ? `<div class="mt-6 border-t pt-4">
+                 <h4 class="text-lg font-semibold text-gray-700 mb-3">Storico</h4>
+                 <ul class="space-y-2 max-h-48 overflow-y-auto pr-2">
+                    ${weights.map(entry => `
+                        <li class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-200 animate-fadeIn">
+                            <span class="text-sm text-gray-600">${new Date(entry.date).toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                            <span class="font-bold text-gray-800">${entry.weight} kg</span>
+                        </li>
+                    `).join('')}
+                   </ul>
+               </div>`
+            : `<p class="text-center text-gray-500 mt-6 bg-gray-50 p-4 rounded-lg border">Nessun dato registrato. Inizia salvando il tuo peso!</p>`;
+        
+        container.innerHTML = `
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-green-100 text-green-600 rounded-lg p-2">
+                    ${ICONS.scale}
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900">Tracciamento Peso</h3>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center gap-3">
+                <input type="number" id="weight-input" placeholder="Es. 75.5" class="weight-input flex-grow w-full" step="0.1" min="0">
+                <button id="save-weight-btn" class="save-weight-btn w-full sm:w-auto">Salva Peso</button>
+            </div>
+            ${historyHtml}
+        `;
+
+        const saveBtn = document.getElementById('save-weight-btn');
+        const weightInput = document.getElementById('weight-input') as HTMLInputElement;
+
+        saveBtn.addEventListener('click', () => {
+            const weightValue = parseFloat(weightInput.value);
+            if (!weightValue || weightValue <= 0) {
+                alert("Per favore, inserisci un peso valido.");
+                return;
+            }
+
+            const newEntry = {
+                date: new Date().toISOString().split('T')[0], // YYYY-MM-DD
+                weight: weightValue
+            };
+
+            const currentWeights = JSON.parse(localStorage.getItem('userWeights') || '[]');
+            currentWeights.push(newEntry);
+            localStorage.setItem('userWeights', JSON.stringify(currentWeights));
+            
+            weightInput.value = ''; // Clear input
+            renderWeightTracker(); // Re-render to show the new entry
+        });
+    };
+
+
     // Renderizzazione iniziale
     renderDay(currentDayId);
     renderAlternatives();
     renderTiming();
     renderSupplements();
+    renderWeightTracker();
+
+    // Handle splash screen and app visibility
+    const splashScreen = document.getElementById('splash-screen');
+    const appWrapper = document.getElementById('app-wrapper');
+
+    if (splashScreen && appWrapper) {
+        // Wait a bit to ensure content is painted and to show the splash for a moment
+        setTimeout(() => {
+            appWrapper.classList.add('visible');
+            splashScreen.classList.add('hidden');
+        }, 500); // 500ms delay
+    }
 });

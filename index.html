@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piano Alimentare</title>
+    <title>Dieta br1</title>
+
+    <!-- App Identity & PWA -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥗</text></svg>">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0d9488">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,39 +27,51 @@
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
-        <!-- Intestazione -->
-        <header class="mb-8 text-center">
-            <div class="inline-block bg-teal-500/10 p-4 rounded-full mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-teal-600" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M16 2C16.5523 2 17 2.44772 17 3V5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V6C2 5.44772 2.44772 5 3 5H7V3C7 2.44772 7.44772 2 8 2H16ZM15 4H9V5H15V4ZM20 7H4V19H20V7ZM13.9 10L15.3 11.4L11.5 15.2L8.7 12.4L7.3 13.8L11.5 18L16.7 12.8L15.3 11.4L13.9 10Z"></path>
-                </svg>
-            </div>
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">Il Tuo Piano Alimentare</h1>
-            <p class="mt-3 text-lg text-gray-500 max-w-2xl mx-auto">Monitora i tuoi pasti e macro giornalieri con un design pulito e moderno.</p>
-        </header>
-
-        <!-- Selettore dei Giorni -->
-        <div id="day-selector" class="sticky top-4 z-10 flex flex-wrap justify-center gap-2 mb-8 p-2 bg-white/70 backdrop-blur-sm rounded-full shadow-inner border">
-            <!-- I pulsanti verranno inseriti qui da JavaScript -->
-        </div>
-
-        <!-- Contenuto Principale -->
-        <main id="main-content">
-            <!-- La scheda del giorno verrà inserita qui -->
-        </main>
-
-        <!-- Sezioni Aggiuntive -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-            <!-- Opzioni Alternative -->
-            <div id="alternatives-section" class="bg-white p-6 rounded-2xl shadow-lg border border-white"></div>
-            <!-- Timing e Idratazione -->
-            <div id="timing-section" class="bg-white p-6 rounded-2xl shadow-lg border border-white"></div>
-            <!-- Integratori -->
-            <div id="supplements-section" class="bg-white p-6 rounded-2xl shadow-lg border border-white"></div>
-        </div>
-
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div class="emoji">🥗</div>
     </div>
+
+    <div id="app-wrapper">
+        <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
+            <!-- Intestazione -->
+            <header class="mb-8 text-center">
+                <div class="inline-block bg-teal-500/10 p-4 rounded-full mb-4">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-teal-600" viewBox="0 0 100 100" fill="currentColor">
+                        <text y=".9em" font-size="90">🥗</text>
+                    </svg>
+                </div>
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">Dieta br1</h1>
+                <p class="mt-3 text-lg text-gray-500 max-w-2xl mx-auto">Piano alimentare che parte dal 26/08/2025</p>
+            </header>
+
+            <!-- Selettore dei Giorni -->
+            <div id="day-selector" class="sticky top-4 z-10 flex flex-wrap justify-center gap-2 mb-8 p-2 bg-white/70 backdrop-blur-sm rounded-full shadow-inner border">
+                <!-- I pulsanti verranno inseriti qui da JavaScript -->
+            </div>
+
+            <!-- Contenuto Principale -->
+            <main id="main-content">
+                <!-- La scheda del giorno verrà inserita qui -->
+            </main>
+
+            <!-- Weight Tracker Section -->
+            <div id="weight-tracker-section" class="bg-white p-6 rounded-2xl shadow-lg border border-white mt-8">
+                <!-- Il tracciamento del peso verrà inserito qui -->
+            </div>
+
+            <!-- Sezioni Aggiuntive -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                <!-- Opzioni Alternative -->
+                <div id="alternatives-section" class="bg-white p-6 rounded-2xl shadow-lg border border-white"></div>
+                <!-- Timing e Idratazione -->
+                <div id="timing-section" class="bg-white p-6 rounded-2xl shadow-lg border border-white"></div>
+                <!-- Integratori -->
+                <div id="supplements-section" class="bg-white p-6 rounded-2xl shadow-lg border border-white"></div>
+            </div>
+        </div>
+    </div>
+
 
     <script type="module" src="index.tsx"></script>
 </body>
