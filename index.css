@@ -1,0 +1,40 @@
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.nutrient-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+}
+
+/* New color scheme for tags */
+.carb { background-color: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+.protein { background-color: #eef2ff; color: #3730a3; border: 1px solid #c7d2fe; }
+.fat { background-color: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+
+
+/* Fade-in animation */
+.content-fade-in {
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
