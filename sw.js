@@ -4,8 +4,7 @@ const urlsToCache = [
   '/index.html',
   '/index.css',
   '/index.tsx',
-  '/manifest.json',
-  '/icon.svg'
+  '/manifest.json'
 ];
 
 // Install event: cache core assets.

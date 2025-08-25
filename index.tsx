@@ -371,16 +371,4 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTiming();
     renderSupplements();
     renderWeightTracker();
-
-    // Handle splash screen and app visibility
-    const splashScreen = document.getElementById('splash-screen');
-    const appWrapper = document.getElementById('app-wrapper');
-
-    if (splashScreen && appWrapper) {
-        // Wait a bit to ensure content is painted and to show the splash for a moment
-        setTimeout(() => {
-            appWrapper.classList.add('visible');
-            splashScreen.classList.add('hidden');
-        }, 500); // 500ms delay
-    }
 });
