@@ -49,6 +49,108 @@ const dietPlan = {
                 { name: 'Prenanna / Post-Workout', foods: '250g Yogurt Greco 0%', kcal: 150, macros: { c: 5, p: 25, g: 2 } }
             ],
             total: { kcal: '~2200', macros: { c: 'Flex', p: 'Flex', g: 'Flex' } }
+        },
+        {
+            id: 'dieta-flessibile',
+            title: 'Dieta Flessibile',
+            isFlexible: true,
+            flexibleContent: {
+                title: 'Piano Alimentare Flessibile (Lunedì - Sabato) - VERSIONE AGGIORNATA',
+                meals: [
+                    {
+                        name: 'Pranzo',
+                        kcalRange: '600-650 kcal',
+                        categories: [
+                            {
+                                name: 'Fonte di CARBOIDRATI',
+                                note: 'scegliere 1 opzione',
+                                options: [
+                                    'Riso Basmati/Integrale: 90g',
+                                    'Pasta di semola/integrale: 90g',
+                                    'Patate: 350g',
+                                    'Pane integrale/di segale: 130g',
+                                    'Couscous integrale: 90g',
+                                    'Gnocchi di patate: 300g'
+                                ]
+                            },
+                            {
+                                name: 'Fonte di PROTEINE',
+                                note: 'scegliere 1 opzione',
+                                options: [
+                                    'Petto di pollo o tacchino: 200g',
+                                    'Macinato magro di manzo o vitello: 180g',
+                                    'Merluzzo, platessa, orata, branzino: 230g',
+                                    'Salmone fresco: 180g',
+                                    'Lenticchie rosse (secche): 180g (Nota: apporta anche una quota di carboidrati)',
+                                    'Burger di manzo magro (fatto in casa): 180g'
+                                ]
+                            },
+                            {
+                                name: 'Fonte di GRASSI',
+                                note: 'scegliere 1 opzione',
+                                options: [
+                                    'Olio Extra Vergine di Oliva (EVO): 10g (un cucchiaio)',
+                                    'Avocado: 60g',
+                                    'Mandorle/Noci: 20g',
+                                    'Olive nere: 60g',
+                                    'Semi di lino/chia: 15g'
+                                ]
+                            },
+                            {
+                                name: 'VERDURA',
+                                note: 'A piacere, condita con limone, aceto, spezie. Almeno 200-300g.',
+                                options: []
+                            }
+                        ]
+                    },
+                    {
+                        name: 'Cena',
+                        kcalRange: '600-650 kcal',
+                        categories: [
+                            {
+                                name: 'Fonte di CARBOIDRATI',
+                                note: 'scegliere 1 opzione',
+                                options: [
+                                    'Pane integrale/di segale: 80g',
+                                    'Patate dolci o classiche: 250g',
+                                    'Riso integrale/Venere/Rosso: 60g',
+                                    'Legumi in scatola (scolati e sciacquati): 300g',
+                                    'Piadina integrale: 1 (circa 70g)',
+                                    'Gallette di riso/mais: 50g'
+                                ]
+                            },
+                            {
+                                name: 'Fonte di PROTEINE',
+                                note: 'le opzioni restano invariate',
+                                options: [
+                                    'Petto di pollo o tacchino: 200g',
+                                    'Frittata: 3 uova intere + 150g albumi',
+                                    'Pesce bianco (merluzzo, platessa, orata): 250g',
+                                    'Spezzatino di vitello magro: 200g',
+                                    'Fesa di tacchino a fette / Affettato magro: 200g',
+                                    'Fiocchi di latte magri: 400g'
+                                ]
+                            },
+                            {
+                                name: 'Fonte di GRASSI',
+                                note: 'scegliere 1 opzione',
+                                options: [
+                                    'Olio Extra Vergine di Oliva (EVO): 15g (un cucchiaio e mezzo)',
+                                    'Avocado: 80g',
+                                    'Frutta secca mista (noci, mandorle): 30g',
+                                    'Formaggio spalmabile light (tipo Philadelphia Active): 70g',
+                                    'Parmigiano Reggiano: 25g'
+                                ]
+                            },
+                            {
+                                name: 'VERDURA',
+                                note: 'A piacere, almeno 200-300g.',
+                                options: []
+                            }
+                        ]
+                    }
+                ]
+            }
         }
     ],
     alternatives: {
@@ -96,6 +198,7 @@ const ICONS = {
     supplements: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>`,
     checkmark: `<svg class="h-5 w-5 text-teal-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>`,
     scale: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 7.001L7 16l4 4 6.001-6.001a5.002 5.002 0 00-7.001-7.001zM11 7l-3 3m0 0l3 3m-3-3h12" /></svg>`,
+    flexible: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>`,
 };
 
 // --- LOGICA DELL'APPLICAZIONE ---
@@ -172,7 +275,59 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
     `;
-    
+
+    // Funzione per creare la pagina della dieta flessibile
+    const createFlexibleDietPage = (flexibleData) => {
+        const { title, meals } = flexibleData;
+        const mealsHtml = meals.map(meal => {
+            const categoriesHtml = meal.categories.map(cat => {
+                const optionsHtml = cat.options.length > 0
+                    ? `
+                        <div class="space-y-2">
+                            ${cat.options.map(opt => `
+                                <div class="bg-gray-50 p-3 rounded-lg text-gray-600 text-sm border border-gray-200 flex items-start gap-3">
+                                    <div class="flex-shrink-0 pt-1">${ICONS.checkmark}</div>
+                                    <span>${opt}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `
+                    : '';
+                
+                const noteHtml = cat.note ? `<p class="text-sm text-gray-500 mb-3">${cat.note}</p>` : '';
+
+                return `
+                    <div>
+                        <h4 class="font-semibold text-gray-700 text-lg">${cat.name}</h4>
+                        ${noteHtml}
+                        ${optionsHtml}
+                    </div>
+                `;
+            }).join('<hr class="my-6 border-gray-200">');
+
+            return `
+                <div class="mt-6">
+                    <h3 class="text-xl font-bold text-teal-800 mb-4">${meal.name} <span class="font-medium text-gray-500">(${meal.kcalRange})</span></h3>
+                    <div class="space-y-6">
+                        ${categoriesHtml}
+                    </div>
+                </div>
+            `;
+        }).join('<hr class="my-8 border-dashed">');
+        
+        return `
+            <div class="bg-white/50 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-white">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="bg-purple-100 text-purple-600 rounded-lg p-2">
+                        ${ICONS.flexible}
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-900">${title}</h2>
+                </div>
+                ${mealsHtml}
+            </div>
+        `;
+    };
+
     // Funzione per renderizzare il piano di un giorno
     const renderDay = (dayId) => {
         const dayData = dietPlan.days.find(d => d.id === dayId);
@@ -185,26 +340,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Delay to allow animation to trigger
         setTimeout(() => {
-            const mealsHtml = dayData.meals.map(createMealCard).join('');
-            mainContent.innerHTML = `
-                <div class="bg-white/50 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-white">
-                    <h2 class="text-3xl font-bold mb-6 text-gray-900">${dayData.title}</h2>
-                    <div class="space-y-4 mb-6">
-                        ${mealsHtml}
-                    </div>
-                    <div class="bg-teal-50 border-2 border-teal-200 rounded-xl p-5 mt-6">
-                        <h3 class="text-xl font-bold text-teal-800">Totale Giorno</h3>
-                        <div class="flex flex-wrap justify-between items-center mt-3 gap-2">
-                            <p class="font-bold text-2xl text-teal-900">${dayData.total.kcal} <span class="text-lg font-medium text-teal-700">kcal</span></p>
-                            <div class="text-right flex flex-wrap">
-                                <span class="nutrient-tag carb">${ICONS.carb} C: ${dayData.total.macros.c}${dayData.total.macros.c !== 'Flex' ? 'g' : ''}</span>
-                                <span class="nutrient-tag protein">${ICONS.protein} P: ${dayData.total.macros.p}${dayData.total.macros.p !== 'Flex' ? 'g' : ''}</span>
-                                <span class="nutrient-tag fat">${ICONS.fat} G: ${dayData.total.macros.g}${dayData.total.macros.g !== 'Flex' ? 'g' : ''}</span>
+            let contentHtml = '';
+            if (dayData.isFlexible) {
+                contentHtml = createFlexibleDietPage(dayData.flexibleContent);
+            } else {
+                const mealsHtml = dayData.meals.map(createMealCard).join('');
+                contentHtml = `
+                    <div class="bg-white/50 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-white">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">${dayData.title}</h2>
+                        <div class="space-y-4 mb-6">
+                            ${mealsHtml}
+                        </div>
+                        <div class="bg-teal-50 border-2 border-teal-200 rounded-xl p-5 mt-6">
+                            <h3 class="text-xl font-bold text-teal-800">Totale Giorno</h3>
+                            <div class="flex flex-wrap justify-between items-center mt-3 gap-2">
+                                <p class="font-bold text-2xl text-teal-900">${dayData.total.kcal} <span class="text-lg font-medium text-teal-700">kcal</span></p>
+                                <div class="text-right flex flex-wrap">
+                                    <span class="nutrient-tag carb">${ICONS.carb} C: ${dayData.total.macros.c}${dayData.total.macros.c !== 'Flex' ? 'g' : ''}</span>
+                                    <span class="nutrient-tag protein">${ICONS.protein} P: ${dayData.total.macros.p}${dayData.total.macros.p !== 'Flex' ? 'g' : ''}</span>
+                                    <span class="nutrient-tag fat">${ICONS.fat} G: ${dayData.total.macros.g}${dayData.total.macros.g !== 'Flex' ? 'g' : ''}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            `;
+                `;
+            }
+            mainContent.innerHTML = contentHtml;
              mainContent.classList.add('content-fade-in');
         }, 10);
        
