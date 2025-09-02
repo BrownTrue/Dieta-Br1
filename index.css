@@ -89,3 +89,46 @@ body {
 .max-h-48::-webkit-scrollbar-thumb:hover {
     background: #64748b; /* slate-500 */
 }
+
+/* Accordion for Flexible Diet */
+.meal-accordion {
+    background-color: #ffffff;
+    border-radius: 0.75rem; /* rounded-xl */
+    border: 1px solid #e5e7eb; /* gray-200 */
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+}
+
+.meal-accordion[open] {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: #d1fae5; /* green-100 */
+}
+
+.meal-accordion-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    list-style: none; /* remove default marker */
+    font-weight: 600;
+}
+
+.meal-accordion-summary::-webkit-details-marker {
+    display: none; /* hide default marker for Safari */
+}
+
+.accordion-icon {
+    transition: transform 0.3s ease-in-out;
+    color: #9ca3af; /* gray-400 */
+}
+
+.meal-accordion[open] .accordion-icon {
+    transform: rotate(180deg);
+    color: #0d9488; /* teal-600 */
+}
+
+.meal-accordion-content {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    border-top: 1px solid #f3f4f6; /* gray-100 */
+}

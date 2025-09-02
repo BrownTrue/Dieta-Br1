@@ -104,6 +104,46 @@ const dietPlan = {
                         ]
                     },
                     {
+                        name: 'Merenda',
+                        kcalRange: 'circa 300-350 kcal',
+                        categories: [
+                            {
+                                name: 'Step 1: Scegli la tua base proteica',
+                                note: 'Scegliere 1 opzione.',
+                                options: [
+                                    'Yogurt Greco 0% grassi: 250g',
+                                    'Fiocchi di latte magri: 200g',
+                                    'Salmone affumicato: 120g',
+                                    'Prosciutto crudo sgrassato / Bresaola: 100g',
+                                    'Albumi d\'uovo: 250g (cotti, es. in pancake o strapazzati)'
+                                ]
+                            },
+                            {
+                                name: 'Step 2 (OPZIONE A): Aggiungi una fonte di CARBOIDRATI',
+                                note: 'Se non scegli i grassi, aggiungi una di queste opzioni alla base proteica.',
+                                options: [
+                                    'Fiocchi d\'avena: 50g',
+                                    'Pane integrale o di segale: 70g',
+                                    'Gallette di riso/mais: 50g',
+                                    '2 Frutti medi (es. 2 mele o 2 pere) + 1 galletta di riso',
+                                    'Banana: 150g (circa 1 e mezza)',
+                                    'Fette biscottate integrali: 6 fette'
+                                ]
+                            },
+                            {
+                                name: 'Step 2 (OPZIONE B): Aggiungi una fonte di GRASSI',
+                                note: 'Se non scegli i carboidrati, aggiungi una di queste opzioni alla base proteica.',
+                                options: [
+                                    'Mandorle / Noci / Anacardi: 35g',
+                                    'Burro d\'arachidi 100%: 35g',
+                                    'Cioccolato fondente (>85%): 35g',
+                                    'Avocado: 120g',
+                                    'Mascarpone: 50g (ottimo da mescolare con lo yogurt greco)'
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         name: 'Cena',
                         kcalRange: '600-650 kcal',
                         categories: [
@@ -146,6 +186,34 @@ const dietPlan = {
                                 name: 'VERDURA',
                                 note: 'A piacere, almeno 200-300g.',
                                 options: []
+                            }
+                        ]
+                    },
+                    {
+                        name: 'Prenanna / Post-Workout',
+                        kcalRange: 'circa 500 kcal',
+                        categories: [
+                            {
+                                name: 'Fonte di PROTEINE',
+                                note: 'scegliere 1 opzione',
+                                options: [
+                                    '40g Proteine Whey + 300ml Latte scremato (o acqua/bevanda vegetale)',
+                                    '500g Yogurt Greco 0% grassi',
+                                    '400g Fiocchi di latte magri',
+                                    '400ml Albumi d\'uovo (cotti)',
+                                    '350g Skyr'
+                                ]
+                            },
+                            {
+                                name: 'Fonte di CARBOIDRATI',
+                                note: 'scegliere 1 opzione',
+                                options: [
+                                    '60g Fiocchi di mais (Corn Flakes)',
+                                    '60g Fiocchi d\'avena',
+                                    '2 Banane medie (circa 200g totali)',
+                                    '60g Riso soffiato o gallette di riso sbriciolate',
+                                    '50g Miele + 30g gallette di riso'
+                                ]
                             }
                         ]
                     }
@@ -279,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Funzione per creare la pagina della dieta flessibile
     const createFlexibleDietPage = (flexibleData) => {
         const { title, meals } = flexibleData;
-        const mealsHtml = meals.map(meal => {
+        const mealsHtml = meals.map((meal, index) => {
             const categoriesHtml = meal.categories.map(cat => {
                 const optionsHtml = cat.options.length > 0
                     ? `
@@ -306,14 +374,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }).join('<hr class="my-6 border-gray-200">');
 
             return `
-                <div class="mt-6">
-                    <h3 class="text-xl font-bold text-teal-800 mb-4">${meal.name} <span class="font-medium text-gray-500">(${meal.kcalRange})</span></h3>
-                    <div class="space-y-6">
-                        ${categoriesHtml}
+                <details class="meal-accordion" ${index === 0 ? 'open' : ''}>
+                    <summary class="meal-accordion-summary">
+                        <div class="flex-grow">
+                             <h3 class="text-xl font-bold text-teal-800">${meal.name}</h3>
+                             <span class="text-sm font-medium text-gray-500">${meal.kcalRange}</span>
+                        </div>
+                        <div class="accordion-icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </div>
+                    </summary>
+                    <div class="meal-accordion-content">
+                        <div class="space-y-6">
+                            ${categoriesHtml}
+                        </div>
                     </div>
-                </div>
+                </details>
             `;
-        }).join('<hr class="my-8 border-dashed">');
+        }).join('');
         
         return `
             <div class="bg-white/50 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-white">
@@ -321,9 +399,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="bg-purple-100 text-purple-600 rounded-lg p-2">
                         ${ICONS.flexible}
                     </div>
-                    <h2 class="text-3xl font-bold text-gray-900">${title}</h2>
+                    <h2 class="text-3xl font-bold text-gray-900">${flexibleData.title}</h2>
                 </div>
-                ${mealsHtml}
+                <div class="space-y-4">
+                    ${mealsHtml}
+                </div>
             </div>
         `;
     };
